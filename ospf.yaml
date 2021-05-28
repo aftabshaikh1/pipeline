@@ -1,0 +1,21 @@
+---
+- name: Configure OSPF on CISCO IOS
+  hosts: r1
+  gather_facts: false
+  connection: local
+
+  vars:
+    cli:
+      username: aftab
+      password: cisco
+      timeout: 100
+
+  tasks:
+    - name: some commands
+      ios_config:
+        provider: "{{ cli }}"
+        lines:
+          - router-id 1.1.1.1
+          - network 0.0.0.0  0.0.0.0  area 0
+        parents: router ospf 121
+        
